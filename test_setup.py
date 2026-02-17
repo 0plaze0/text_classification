@@ -27,18 +27,18 @@ def test_imports():
     for display_name, import_name in packages:
         try:
             __import__(import_name)
-            print(f"✓ {display_name}")
+            print(f" {display_name}")
         except ImportError as e:
-            print(f"✗ {display_name} - {str(e)}")
+            print(f" {display_name} - {str(e)}")
             failed.append(display_name)
     
     if failed:
-        print(f"\n❌ Failed to import: {', '.join(failed)}")
+        print(f"\n Failed to import: {', '.join(failed)}")
         print("\nPlease install missing packages:")
         print("pip install -r requirements.txt")
         return False
     else:
-        print("\n✅ All packages imported successfully!")
+        print("\n All packages imported successfully!")
         return True
 
 def test_sklearn_models():
@@ -56,14 +56,14 @@ def test_sklearn_models():
         rf = RandomForestClassifier(n_estimators=10, random_state=42)
         svm = LinearSVC(random_state=42)
         
-        print("✓ Naive Bayes")
-        print("✓ Random Forest")
-        print("✓ SVM (LinearSVC)")
-        print("\n✅ All models can be instantiated!")
+        print(" Naive Bayes")
+        print(" Random Forest")
+        print(" SVM")
+        print("\n All models can be instantiated!")
         return True
         
     except Exception as e:
-        print(f"❌ Error testing models: {str(e)}")
+        print(f" Error testing models: {str(e)}")
         return False
 
 def test_text_processing():
@@ -95,11 +95,11 @@ def test_text_processing():
         
         print(f"\n✓ TF-IDF vectorization successful")
         print(f"  Feature matrix shape: {features.shape}")
-        print("\n✅ Text processing works correctly!")
+        print("\n Text processing works correctly!")
         return True
         
     except Exception as e:
-        print(f"❌ Error in text processing: {str(e)}")
+        print(f" Error in text processing: {str(e)}")
         return False
 
 def check_kaggle_config():
@@ -113,10 +113,10 @@ def check_kaggle_config():
     kaggle_config_path = os.path.expanduser("~/.kaggle/kaggle.json")
     
     if os.path.exists(kaggle_config_path):
-        print(f"✅ Kaggle config found at: {kaggle_config_path}")
+        print(f" Kaggle config found at: {kaggle_config_path}")
         return True
     else:
-        print(f"⚠️  Kaggle config not found at: {kaggle_config_path}")
+        print(f"  Kaggle config not found at: {kaggle_config_path}")
         print("\nTo set up Kaggle API:")
         print("1. Create account at https://www.kaggle.com")
         print("2. Go to Account → API → Create New Token")
@@ -151,15 +151,15 @@ def main():
     print("="*50)
     
     if all(results):
-        print("\n✅ All tests passed! You're ready to run the classifier.")
+        print("\n All tests passed! You're ready to run the classifier.")
         if kaggle_ready:
-            print("\n🚀 Run the classifier with:")
+            print("\n Run the classifier with:")
             print("   python text_classifier.py")
         else:
-            print("\n⚠️  Set up Kaggle API first, or use a local CSV file:")
+            print("\n  Set up Kaggle API first, or use a local CSV file:")
             print("   classifier = TextClassifier(data_path='your_file.csv')")
     else:
-        print("\n❌ Some tests failed. Please fix the issues above.")
+        print("\n Some tests failed. Please fix the issues above.")
         print("   Install missing packages: pip install -r requirements.txt")
         sys.exit(1)
 
